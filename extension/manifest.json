@@ -1,0 +1,21 @@
+{
+    "name": "Bluesky Clickable Hashtag",
+    "short_name": "blueskyClickableHashtag",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "__MSG_Description__",
+    "default_locale": "en",
+    "icons": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://bsky.app/*"],
+        "run_at": "document_end",
+        "js": ["userscript.user.js"],
+        "world":"MAIN"
+      }
+    ]
+  }
