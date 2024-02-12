@@ -2,7 +2,7 @@
 // @name         Bluesky Clickable Hashtag
 // @name:ja         Bluesky Clickable Hashtag
 // @namespace    https://github.com/yakisova41
-// @version      1.0.1
+// @version      1.0.2
 // @description  Make bluesky hashtags blue and clickable
 // @description:ja  blueskyのハッシュタグを青文字にし、クリック可能にします
 // @author       yakisova41
