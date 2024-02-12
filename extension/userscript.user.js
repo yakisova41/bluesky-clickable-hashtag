@@ -10,6 +10,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bsky.app
 // @grant        none
 // @license      MIT
+// @run-at       document-end
 // ==/UserScript==
 
 getRouterElem().then(routerElem => {
