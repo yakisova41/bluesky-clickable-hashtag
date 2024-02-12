@@ -10,10 +10,9 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bsky.app
 // @grant        none
 // @license      MIT
-// ==/UserScript==\
+// ==/UserScript==
 
-setTimeout(() => {
-    const routerElem = document.querySelector("#root > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) ")
+getRouterElem().then(routerElem => {
     const navigation = routerElem[getPropsKey(routerElem)].children.props.children[0].props.children.props.children.props.children.props.value.navigation;
 
     const style = document.createElement("style");
@@ -38,9 +37,9 @@ setTimeout(() => {
     document.head.appendChild(style);
 
     const observer = new MutationObserver(()=> {    
-        const texts = document.querySelectorAll(`div[data-word-wrap="1"]:not(.hashtaged)`);
+        const texts = document.querySelectorAll(`div[data-word-wrap="1"]:not(.clickable-hashtag)`);
         texts.forEach(textElem => {
-            textElem.classList.add("hashtaged");
+            textElem.classList.add("clickable-hashtag");
             textElem.innerHTML = textElem.innerHTML.replace(/#(\S*)/g, '<a class="clickable-hashtag-nolistener clickable-hashtag-link" role="link" keyword="$1" style="font-size: 16px; letter-spacing: 0.25px; font-weight: 400; color: rgb(16, 131, 254);" href="/search?q=$1">#$1</a>')
             const nolistenerElements = textElem.querySelectorAll(".clickable-hashtag-nolistener");
             nolistenerElements.forEach(nolistenerElement => {
@@ -59,7 +58,7 @@ setTimeout(() => {
         childList: true,
         subtree: true
     })
-}, 100);
+});
  
 function getPropsKey(elem) {
     let result = null;
@@ -69,4 +68,16 @@ function getPropsKey(elem) {
         } 
     });
     return result;
+}
+
+function getRouterElem() {
+    return new Promise((resolve) => {
+        const interval = setInterval(() => {
+            const routerElem = document.querySelector("#root > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)");
+            if(routerElem !== null) {
+                resolve(routerElem);
+                clearInterval(interval);
+            }
+        }, 500);        
+    });
 }
